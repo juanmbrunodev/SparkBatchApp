@@ -13,7 +13,4 @@ public abstract class Job<T> {
         Optional<T> processOutput = process(preProcessOutput);
         postProcess(processOutput);
     }
-
-
-
 }

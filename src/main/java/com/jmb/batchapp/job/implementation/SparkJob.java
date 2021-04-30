@@ -25,6 +25,7 @@ public class SparkJob extends Job<Dataset<Row>> {
 
     @Override
     protected Optional<Dataset<Row>> preProcess() {
+        //Calls component type of class, executes Spark Transformations
         return Optional.empty();
     }
 
@@ -36,11 +37,6 @@ public class SparkJob extends Job<Dataset<Row>> {
 
     @Override
     protected void postProcess(Optional<Dataset<Row>> processOutput) {
-        //Implement Tidy up code, closing of resources, etc.
-    }
-
-    @Override
-    public void execute() {
-        LOGGER.info("In Execute Method for Job: " + getClass());
+        //Other logic, implement Tidy up code, etc.
     }
 }

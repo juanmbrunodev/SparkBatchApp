@@ -3,14 +3,15 @@ package com.jmb.batchapp.persistence.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "CLIENT_CONFIG")
-public class ClientConfiguration {
+@Table(name = "JOB_CONFIG")
+public class JobConfiguration {
 
-    public ClientConfiguration(){};
+    public JobConfiguration(){};
 
     @Id @GeneratedValue
     private Integer id;
     private String clientId;
+    private String jobName;
     private String configName;
     private String value;
 }
