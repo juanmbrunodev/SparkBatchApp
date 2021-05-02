@@ -34,3 +34,7 @@ hs_err_pid*
 #Maven files
 mvnw
 mvnw.cmd
+
+#Other files
+.DS_Store
+batch-app.iml
