@@ -14,7 +14,9 @@ import java.util.Optional;
 public enum ParameterName {
 
     JOB_NAME("jobName"),
-    READ_FORMAT("readFormat");
+    CLIENT_ID("clientId"),
+    READ_FORMAT("readFormat"),
+    FILE_NAME("fileName");
 
     //Others to be added...
 

@@ -24,19 +24,19 @@ public class SparkJob extends Job<Dataset<Row>> {
     }
 
     @Override
-    protected Optional<Dataset<Row>> preProcess() {
-        //Calls component type of class, executes Spark Transformations
-        return Optional.empty();
+    protected Dataset<Row> preProcess() {
+        //Calls component type of class
+        return null;
     }
 
     @Override
-    protected Optional<Dataset<Row>> process(Optional<Dataset<Row>> preProcessOutput) {
-        //Calls component type of class here, which is the actual Spark API based Class
-        return Optional.empty();
+    protected Dataset<Row> process(Dataset<Row> preProcessOutput) {
+        //Calls component type of class here
+        return null;
     }
 
     @Override
-    protected void postProcess(Optional<Dataset<Row>> processOutput) {
+    protected void postProcess(Dataset<Row> processOutput) {
         //Other logic, implement Tidy up code, etc.
     }
 }

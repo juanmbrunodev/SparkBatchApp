@@ -55,7 +55,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		<dependency>
+			<groupId>org.codehaus.janino</groupId>
+			<artifactId>janino</artifactId>
+			<version>3.0.8</version>
+		</dependency>
 		<!-- ORM	-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
