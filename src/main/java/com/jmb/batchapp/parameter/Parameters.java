@@ -2,10 +2,7 @@ package com.jmb.batchapp.parameter;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * This class is initialized in any {@link com.jmb.batchapp.job.Job} implementation, after said class
@@ -18,19 +15,23 @@ public class Parameters {
     private static final int KEY = 0;
     private static final int VALUE = 1;
 
-    private Map<ParameterName, String> jobParams = new HashMap<>();
+    private Map<Parameter, String> jobParams = new HashMap<>();
 
-    public void setJobParams(String[] args) {
-        Arrays.stream(args).forEach(arg -> {
+    public void loadAllParams(String[] appArgs, Parameter[] parameters) {
+        Map<String, String> keyVals = new HashMap<>();
+        Arrays.stream(appArgs).forEach(arg -> {
             String[] keyVal = arg.split(ARG_SEPARATOR);
-            Optional<ParameterName> searchedParam = ParameterName.paramExists(keyVal[KEY]);
-            if(searchedParam.isPresent()){
-                jobParams.put(searchedParam.get(), keyVal[VALUE]);
+            keyVals.put(keyVal[KEY], keyVal[VALUE]);
+        });
+        Arrays.stream(parameters).forEach(parameter -> {
+            String value = keyVals.get(parameter.getParamName());
+            if(Objects.nonNull(value)) {
+                jobParams.put(parameter, value);
             }
         });
     }
 
-    public String getParamValue(ParameterName paramName) {
+    public String getParamValue(Parameter paramName) {
         return jobParams.get(paramName);
     }
 }
