@@ -1,7 +1,5 @@
 package com.jmb.batchapp.parameter;
 
-import com.jmb.batchapp.exception.model.BatchAppException;
-
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -11,24 +9,27 @@ import java.util.Optional;
  *
  * @author JuanMBruno
  */
-public enum ParameterName {
+public enum CommonJobParameter implements Parameter<CommonJobParameter>{
 
     JOB_NAME("jobName"),
-    CLIENT_ID("clientId"),
-    READ_FORMAT("readFormat"),
-    FILE_NAME("fileName");
+    CLIENT_ID("clientId");
 
     //Others to be added...
 
     private String paramName;
 
-    ParameterName(String paramName) {
+    CommonJobParameter(String paramName) {
         this.paramName = paramName;
     }
 
-    static Optional<ParameterName> paramExists(String argName) {
+    public Optional<CommonJobParameter> paramExists(String argName) {
         return Arrays.stream(values())
-                .filter(parameterName -> parameterName.paramName.equals(argName))
+                .filter(commonJobParameter -> commonJobParameter.paramName.equals(argName))
                 .findFirst();
+    }
+
+    @Override
+    public String getParamName() {
+        return paramName;
     }
 }

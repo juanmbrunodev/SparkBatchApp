@@ -2,8 +2,10 @@ package com.jmb.batchapp.job.component.read;
 
 import com.jmb.batchapp.configuration.SparkSessionProvider;
 import com.jmb.batchapp.dictionary.IngestJobConfig;
+import com.jmb.batchapp.job.context.CommonJobContext;
 import com.jmb.batchapp.job.context.IngesterJobContext;
-import com.jmb.batchapp.parameter.ParameterName;
+import com.jmb.batchapp.parameter.CommonJobParameter;
+import com.jmb.batchapp.parameter.IngesterJobParams;
 import com.jmb.batchapp.persistence.repository.ConfigRepository;
 import org.apache.spark.sql.DataFrameReader;
 import org.apache.spark.sql.Dataset;
@@ -12,6 +14,7 @@ import org.apache.spark.sql.SparkSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,11 +30,11 @@ public class IngesterReader implements Reader<Dataset<Row>> {
 
     private static final String DOT = ".";
 
-    private IngesterJobContext jobContext;
+    private CommonJobContext jobContext;
     private ConfigRepository configRepository;
 
     @Autowired
-    public IngesterReader(IngesterJobContext jobContext,
+    public IngesterReader(@Qualifier("ingesterJobContext") CommonJobContext jobContext,
                           ConfigRepository configRepository) {
         this.jobContext = jobContext;
         this.configRepository = configRepository;
@@ -40,8 +43,8 @@ public class IngesterReader implements Reader<Dataset<Row>> {
     @Override
     public Dataset<Row> read() {
         SparkSession sparkSession = SparkSessionProvider.provideSession(jobContext.getSparkMode());
-        String fileReadFormat = jobContext.getParams().getParamValue(ParameterName.READ_FORMAT);
-        String fileName = jobContext.getParams().getParamValue(ParameterName.FILE_NAME);
+        String fileReadFormat = jobContext.getParams().getParamValue(IngesterJobParams.READ_FORMAT);
+        String fileName = jobContext.getParams().getParamValue(IngesterJobParams.FILE_NAME);
         String fullPath = readInputPath().concat(fileName).concat(DOT).concat(fileReadFormat);
         //Read using Spark
         DataFrameReader dfReader = sparkSession.read().format(fileReadFormat);
@@ -51,8 +54,8 @@ public class IngesterReader implements Reader<Dataset<Row>> {
 
     private String readInputPath() {
         return configRepository
-                .findTop1ByJobNameAndClientIdAndConfigName(jobContext.getParams().getParamValue(ParameterName.JOB_NAME),
-                        jobContext.getParams().getParamValue(ParameterName.CLIENT_ID),
+                .findTop1ByJobNameAndClientIdAndConfigName(jobContext.getParams().getParamValue(CommonJobParameter.JOB_NAME),
+                        jobContext.getParams().getParamValue(CommonJobParameter.CLIENT_ID),
                         IngestJobConfig.INPUT_PATH.getConfigName()).getValue();
     }
 
