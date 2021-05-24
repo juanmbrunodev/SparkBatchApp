@@ -32,6 +32,6 @@ public class SalesSummaryProcessor implements Processor<Dataset<Row>>{
                 return sellerRows.reduce(new SellerSalesReducer());
         }).collect(Collectors.toList());
         return SparkSessionProvider.provideSession(salesSummaryContext.getSparkMode())
-                .createDataFrame(results, results.get(0).schema());
+                .createDataFrame(results, input.schema());
     }
 }

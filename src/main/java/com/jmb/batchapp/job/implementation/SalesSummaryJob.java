@@ -3,6 +3,7 @@ package com.jmb.batchapp.job.implementation;
 import com.jmb.batchapp.job.Job;
 import com.jmb.batchapp.job.component.process.Processor;
 import com.jmb.batchapp.job.component.read.Reader;
+import com.jmb.batchapp.job.component.write.Writer;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.slf4j.Logger;
@@ -20,12 +21,15 @@ public class SalesSummaryJob extends Job<Dataset<Row>> {
 
     private Reader salesSummaryReader;
     private Processor salesSummaryProcessor;
+    private Writer salesSummaryWriter;
 
     @Autowired
     public SalesSummaryJob(@Qualifier("salesSummaryReader") Reader salesSummaryReader,
-                           @Qualifier("salesSummaryProcessor") Processor salesSummaryProcessor) {
+                           @Qualifier("salesSummaryProcessor") Processor salesSummaryProcessor,
+                           @Qualifier("salesSummaryWriter") Writer salesSummaryWriter) {
         this.salesSummaryReader = salesSummaryReader;
         this.salesSummaryProcessor = salesSummaryProcessor;
+        this.salesSummaryWriter = salesSummaryWriter;
     }
 
     @Override
@@ -40,7 +44,6 @@ public class SalesSummaryJob extends Job<Dataset<Row>> {
 
     @Override
     protected void postProcess(Dataset<Row> processOutput) {
-        LOGGER.info("Results for the Job Execution");
-        processOutput.show();
+        salesSummaryWriter.write(processOutput);
     }
 }
