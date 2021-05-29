@@ -9,10 +9,10 @@ import org.apache.spark.sql.types.*;
  */
 public enum SalesSummarySchema {
 
-    SELLER_ID("SELLER_ID", DataTypes.StringType, false, null),
-    SALES_DATE("SALES_DATE", DataTypes.DateType, false, null),
-    ITEM("ITEM", DataTypes.StringType, false, null),
-    QUANTITY("QUANTITY", DataTypes.IntegerType, false, null);
+    SELLER_ID("SELLER_ID", DataTypes.StringType, true, null),
+    SALES_DATE("SALES_DATE", DataTypes.DateType, true, null),
+    PRODUCT("PRODUCT", DataTypes.StringType, true, null),
+    QUANTITY("QUANTITY", DataTypes.IntegerType, true, null);
 
     private String name;
     private DataType type;
