@@ -9,7 +9,6 @@ import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.Properties;
 
 /**
@@ -33,11 +32,12 @@ public class SalesSummaryReader implements Reader<Dataset<Row>> {
     //Read using SparkSQL component, DataFrameReader class, fires a query to the SALES table
     @Override
     public Dataset<Row> read() {
-        String sellerId = salesSummaryContext.getParams().getParamValue(SalesSummaryJobParams.SELLER_ID);
+        String sellers =
+                SalesSummaryQueries.buildInClause(salesSummaryContext.getParams().getParamValue(SalesSummaryJobParams.SELLER_ID));
         String date = salesSummaryContext.getParams().getParamValue(SalesSummaryJobParams.DATE);
         String product = salesSummaryContext.getParams().getParamValue(SalesSummaryJobParams.PRODUCT);
         //Replace params passed and construct query
-        String salesRetrieveQuery = String.format(SalesSummaryQueries.SALES_PER_SELLER_ID_DATE_PROD, sellerId, date, product);
+        String salesRetrieveQuery = String.format(SalesSummaryQueries.SALES_PER_SELLER_ID_DATE_PROD, date, product, sellers);
         return getDatasetFromDbTable(salesRetrieveQuery);
     }
 

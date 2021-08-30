@@ -6,5 +6,5 @@ import java.io.Serializable;
 
 @Component
 public class SalesSummaryContext extends CommonJobContext implements Serializable  {
-
+    //Other specific job properties to go here...
 }

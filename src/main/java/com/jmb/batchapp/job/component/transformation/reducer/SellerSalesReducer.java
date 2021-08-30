@@ -3,6 +3,8 @@ package com.jmb.batchapp.job.component.transformation.reducer;
 import org.apache.spark.api.java.function.ReduceFunction;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Reducer class implements Spark's ReduceFunction and belongs to {@link com.jmb.batchapp.job.implementation.SalesSummaryJob}
@@ -12,8 +14,11 @@ import org.apache.spark.sql.catalyst.expressions.GenericRowWithSchema;
  */
 public class SellerSalesReducer implements ReduceFunction<Row> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SellerSalesReducer.class);
+
     @Override
     public Row call(Row aggregatedRow, Row currentRow) throws Exception {
+        LOGGER.info("Reducing Sales per Seller and Product .... ");
         int colsSize = aggregatedRow.schema().size();
         //Use aggregated row values and add the relevant quantity from currentRow, returning a new Row with sum.
         Object[] newAggregatedRow = new Object[colsSize];

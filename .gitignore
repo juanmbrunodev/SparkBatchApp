@@ -39,3 +39,4 @@ mvnw.cmd
 .DS_Store
 batch-app.iml
 .jar
+dependency-reduced-pom.xml
