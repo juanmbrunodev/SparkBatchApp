@@ -3,7 +3,6 @@ package com.jmb.batchapp.persistence.manager;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
 import javax.sql.DataSource;
 import java.io.Serializable;
 

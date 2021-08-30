@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author JuanMBruno
  */
-public class JsonFlatMapper implements FlatMapFunction<Row, Row> {
+public class IngesterJsonFlatMapper implements FlatMapFunction<Row, Row> {
 
     private static final String SELLER_COLUMN = "Seller_Id";
     private static final String SALES_COLUMN = "Sales";

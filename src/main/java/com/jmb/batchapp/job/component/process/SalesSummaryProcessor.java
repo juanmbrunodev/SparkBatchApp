@@ -8,7 +8,6 @@ import com.jmb.batchapp.job.component.transformation.reducer.SellerSalesReducer;
 import com.jmb.batchapp.job.context.SalesSummaryContext;
 import com.jmb.batchapp.parameter.SalesSummaryJobParams;
 import com.jmb.batchapp.schema.SalesSchema;
-import com.jmb.batchapp.schema.SalesSummarySchema;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.springframework.beans.factory.annotation.Autowired;

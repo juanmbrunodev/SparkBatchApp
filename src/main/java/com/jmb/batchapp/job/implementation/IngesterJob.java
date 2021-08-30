@@ -4,7 +4,6 @@ import com.jmb.batchapp.job.Job;
 import com.jmb.batchapp.job.component.process.Processor;
 import com.jmb.batchapp.job.component.read.Reader;
 import com.jmb.batchapp.job.component.write.Writer;
-import com.jmb.batchapp.persistence.repository.ConfigRepository;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.slf4j.Logger;

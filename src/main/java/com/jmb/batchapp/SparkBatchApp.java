@@ -37,7 +37,7 @@ public class SparkBatchApp implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) {
 		try {
 			LOGGER.info("Parsing common job arguments");
 			loadCommonParams(args);

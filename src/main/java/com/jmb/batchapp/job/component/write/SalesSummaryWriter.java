@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
  * Writer class for the {@link com.jmb.batchapp.job.implementation.SalesSummaryJob} which persists
  * the rows of the received DataFrame into the SALES_SUMMARY DB table.
  * For this it calls Spark Mapper class.
+ *
  * @author JuanMBruno.
  */
 @Component
